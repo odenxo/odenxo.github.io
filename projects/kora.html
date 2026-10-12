@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kora | Made in Nigeria, made to keep</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F1E7D3;--card:#FBF6EA;--ink:#1B1B4B;--muted:#5E5B7A;--line:#D9CCB0;--brand:#1B1B4B;--brand-ink:#F1E7D3;--accent:#C1521F;--gold:#D99A1E;--stamp-ink:#1B1B4B;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12122E;--card:#1C1C45;--ink:#F1E7D3;--muted:#A9A6C7;--line:#34346A;--brand:#E3B24B;--brand-ink:#12122E;--accent:#E87A4C;--gold:#E3B24B}}
+:root[data-theme="dark"]{--bg:#12122E;--card:#1C1C45;--ink:#F1E7D3;--muted:#A9A6C7;--line:#34346A;--brand:#E3B24B;--brand-ink:#12122E;--accent:#E87A4C;--gold:#E3B24B}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 "Public Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0;line-height:1.05}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.1rem}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--ink)}
+.bar{display:flex;align-items:center;gap:.8rem;padding:.7rem 1.1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.5rem;font:800 1.45rem "Bricolage Grotesque",sans-serif;letter-spacing:.18em;margin-right:auto}
+.logo svg{width:1.7rem;height:1.5rem}
+.search{order:3;flex:1 1 100%;padding:.55rem .9rem;border:2px solid var(--ink);border-radius:10px;background:var(--card)}
+@media (min-width:640px){.search{order:0;flex:1 1 12rem;max-width:22rem}}
+.cartbtn{display:flex;align-items:center;gap:.5rem;background:var(--brand);color:var(--brand-ink);border:0;border-radius:10px;padding:.55rem 1rem;font-weight:600}
+.cartbtn b{background:var(--accent);color:#fff;border-radius:999px;min-width:1.4rem;padding:0 .35rem;text-align:center;font-size:.85rem}
+.hero{display:grid;gap:1.5rem;padding:2rem 0 1.5rem;align-items:center}
+@media (min-width:760px){.hero{grid-template-columns:1.2fr 1fr;padding:3rem 0 2rem}}
+.hero h1{font-size:clamp(2.4rem,8vw,4.4rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);max-width:30rem;margin:1rem 0 1.3rem}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:.75rem 1.4rem;border-radius:10px}
+.pat{max-width:20rem;width:100%;justify-self:center;border:2px solid var(--ink);border-radius:22px;overflow:hidden;transform:rotate(2deg)}
+.pat svg{display:block;width:100%;height:auto}
+.vals{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));padding:.5rem 0 1rem}
+.vals div{border-top:3px solid var(--gold);padding-top:.5rem;font-weight:600}
+.vals span{display:block;color:var(--muted);font-weight:400;font-size:.9rem}
+.tools{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;padding:1rem 0}
+.chip{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:.35rem .95rem;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sort{margin-left:auto;padding:.45rem .7rem;border:2px solid var(--ink);border-radius:10px;background:var(--card)}
+.grid{display:grid;gap:1.3rem 1rem;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));padding-bottom:3rem}
+.p{background:var(--card);border:2px solid var(--ink);border-radius:16px;display:flex;flex-direction:column;overflow:visible}
+.art{position:relative;border-radius:14px 14px 0 0;overflow:visible}
+.art svg{display:block;width:100%;height:auto;border-radius:14px 14px 0 0}
+.stamp{position:absolute;left:.7rem;bottom:-.85rem;background:var(--gold);color:#1B1B4B;font-weight:700;padding:.2rem .7rem;border-radius:999px;font-size:.9rem;border:2px solid var(--ink)}
+.pb{padding:1.3rem .9rem .9rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
+.pb small{color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
+.pb h3{font-size:1.05rem}
+.add{margin-top:.6rem;border:0;background:var(--brand);color:var(--brand-ink);border-radius:8px;padding:.6rem;font-weight:600}
+.add:hover{background:var(--accent);color:#fff}
+.empty{grid-column:1/-1;color:var(--muted);padding:2rem 0}
+.ov{position:fixed;inset:0;background:rgba(10,8,25,.6);z-index:20;display:flex;justify-content:flex-end}
+.ov[hidden]{display:none}
+.drawer{width:min(26rem,100%);height:100%;background:var(--bg);border-left:2px solid var(--ink);display:flex;flex-direction:column;padding:calc(1rem + env(safe-area-inset-top,0px)) 1.1rem calc(1rem + env(safe-area-inset-bottom,0px));overflow:auto}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.x{background:none;border:0;font-size:1.8rem;line-height:1;padding:.2rem .5rem}
+.it{display:grid;grid-template-columns:3.4rem 1fr auto;gap:.7rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--line)}
+.it svg{width:3.4rem;height:auto;border-radius:8px;border:2px solid var(--ink)}
+.qty{display:flex;align-items:center;gap:.4rem;margin-top:.2rem}
+.qty button{width:1.7rem;height:1.7rem;border:2px solid var(--ink);background:var(--card);border-radius:6px;font-weight:600}
+.rm{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:.85rem}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:1.2rem;padding:1rem 0}
+.go{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:.85rem;font-weight:600;width:100%}
+.go:disabled{opacity:.5;cursor:not-allowed}
+form label{display:block;font-weight:600;margin-top:.8rem}
+form input,form select{width:100%;margin-top:.3rem;padding:.6rem .7rem;border:2px solid var(--ink);border-radius:8px;background:var(--card)}
+.err{color:#B3261E;font-size:.85rem;min-height:1.1rem;margin:.15rem 0 0}
+@media (prefers-color-scheme:dark){.err{color:#FF8A80}}
+.ok{text-align:center;padding:2rem 0}
+.ok h2{margin-bottom:.6rem}
+.note{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;font-size:.85rem;color:var(--muted);margin-top:1rem}
+footer{border-top:2px solid var(--ink);padding:1.5rem 0 2.5rem;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <div class="logo"><svg viewBox="0 0 28 24" aria-hidden="true"><path d="M4 22V8M10 22V3M16 22V5M22 22V10" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" fill="none"/></svg>KORA</div>
+  <input class="search" id="q" type="search" placeholder="Search products" aria-label="Search products">
+  <button class="cartbtn" id="cartbtn" aria-label="Open cart">Cart <b id="count" aria-live="polite">0</b></button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Made in Nigeria.<br><em>Made to keep.</em></h1>
+      <p>Hand-finished wear, bags and home pieces, named for the kora, the West African harp-lute: patient work, played well. Free delivery in Port Harcourt over ₦50,000.</p>
+      <a class="cta" href="#shop">Shop the collection</a>
+    </div>
+    <div class="pat" id="hero-pat" aria-hidden="true"></div>
+  </section>
+  <section class="vals">
+    <div>Hand-finished<span>Every piece checked by eye</span></div>
+    <div>Made in Nigeria<span>Cloth, clay and leather</span></div>
+    <div>Pay on delivery<span>Available nationwide</span></div>
+  </section>
+  <section id="shop">
+    <div class="tools">
+      <button class="chip" data-cat="All" aria-pressed="true">All</button>
+      <button class="chip" data-cat="Wear" aria-pressed="false">Wear</button>
+      <button class="chip" data-cat="Carry" aria-pressed="false">Carry</button>
+      <button class="chip" data-cat="Home" aria-pressed="false">Home</button>
+      <select class="sort" id="sort" aria-label="Sort products">
+        <option value="def">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+<footer><div class="wrap">Kora is a demo store built by Abode Felix Ibinabo. No real payments are taken.</div></footer>
+
+<div class="ov" id="cartov" hidden role="dialog" aria-modal="true" aria-labelledby="ct"><div class="drawer">
+  <div class="dh"><h2 id="ct">Your cart</h2><button class="x" id="cartx" aria-label="Close cart">&times;</button></div>
+  <div id="items"></div>
+  <div class="tot"><span>Total</span><span id="total">₦0</span></div>
+  <button class="go" id="checkout" disabled>Checkout</button>
+</div></div>
+
+<div class="ov" id="coov" hidden role="dialog" aria-modal="true" aria-labelledby="cot"><div class="drawer">
+  <div class="dh"><h2 id="cot">Checkout</h2><button class="x" id="cox" aria-label="Close checkout">&times;</button></div>
+  <div id="cobody"></div>
+</div></div>
+
+<script>
+const P=[
+ {id:1,n:"Adire indigo shirt",c:"Wear",p:24000,t:"circles",k:["#1B2A6B","#F1E7D3","#6F8FD8"]},
+ {id:2,n:"Ankara wrap trousers",c:"Wear",p:19500,t:"diamonds",k:["#C1521F","#1B1B4B","#E3B24B"]},
+ {id:3,n:"Aso-oke clutch",c:"Carry",p:16500,t:"stripes",k:["#7A1F2B","#E3B24B","#F1E7D3"]},
+ {id:4,n:"Ankara tote",c:"Carry",p:12000,t:"zigzag",k:["#1F6B5C","#F1E7D3","#E3B24B"]},
+ {id:5,n:"Raffia market bag",c:"Carry",p:14500,t:"waves",k:["#C99A4B","#7A4B1E","#F1E7D3"]},
+ {id:6,n:"Black soap and shea set",c:"Home",p:7500,t:"sun",k:["#2A2118","#E3B24B","#8C5A2B"]},
+ {id:7,n:"Hand-poured clay candle",c:"Home",p:9000,t:"circles",k:["#C1521F","#F1E7D3","#7A2E12"]},
+ {id:8,n:"Calabash serving bowl",c:"Home",p:11000,t:"diamonds",k:["#4B3A2A","#E3B24B","#C1521F"]}
+];
+const R=(a)=>`<rect width="120" height="100" fill="${a}"/>`;
+const A={
+ circles:(a,b,c)=>R(a)+[44,34,24,14,5].map((r,i)=>`<circle cx="60" cy="50" r="${r}" fill="${[b,a,c,a,b][i]}"/>`).join(""),
+ diamonds:(a,b,c)=>{let o=R(a);for(let y=0;y<5;y++)for(let x=0;x<7;x++){const cx=x*20+(y%2?10:0),cy=10+y*20;o+=`<path d="M${cx} ${cy-9}l9 9-9 9-9-9z" fill="${(x+y)%2?b:c}"/>`}return o},
+ stripes:(a,b,c)=>R(a)+[0,1,2,3,4,5,6,7].map(i=>`<rect x="${i*15+2}" width="${i%3?5:9}" height="100" fill="${i%2?b:c}"/>`).join(""),
+ zigzag:(a,b,c)=>{let o=R(a);for(let r=0;r<5;r++){let d="M0 "+(18+r*18);for(let x=15;x<=120;x+=15)d+=`L${x} ${(x/15)%2?4+r*18:18+r*18}`;o+=`<path d="${d}" fill="none" stroke="${r%2?b:c}" stroke-width="4"/>`}return o},
+ waves:(a,b,c)=>{let o=R(a);for(let r=0;r<6;r++)o+=`<path d="M0 ${12+r*16}q15-12 30 0t30 0t30 0t30 0" fill="none" stroke="${r%2?b:c}" stroke-width="4"/>`;return o},
+ sun:(a,b,c)=>{let o=R(a);for(let i=0;i<16;i++){const t=i*Math.PI/8,f=d=>`${(60+90*Math.cos(t+d)).toFixed(1)} ${(50+90*Math.sin(t+d)).toFixed(1)}`;o+=`<path d="M60 50L${f(-.12)}L${f(.12)}Z" fill="${i%2?b:c}"/>`}return o+`<circle cx="60" cy="50" r="13" fill="${a}"/>`}
+};
+const art=p=>`<svg viewBox="0 0 120 100" role="img" aria-label="${p.n}">${A[p.t](...p.k)}</svg>`;
+document.getElementById("hero-pat").innerHTML=`<svg viewBox="0 0 120 100">${A.circles("#1B2A6B","#E3B24B","#C1521F")}</svg>`;
+const esc=t=>t.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=n=>"₦"+n.toLocaleString("en-US");
+let cart={},cat="All",sort="def",q="",pin="";
+try{cart=JSON.parse(localStorage.getItem("kora-cart")||"{}")||{}}catch(e){cart={}}
+const $=id=>document.getElementById(id);
+function save(){try{localStorage.setItem("kora-cart",JSON.stringify(cart))}catch(e){}}
+function grid(){
+ let l=P.filter(p=>(cat==="All"||p.c===cat)&&p.n.toLowerCase().includes(q));
+ if(sort==="lo")l=[...l].sort((a,b)=>a.p-b.p);if(sort==="hi")l=[...l].sort((a,b)=>b.p-a.p);
+ $("grid").innerHTML=l.length?l.map(p=>`<article class="p"><div class="art">${art(p)}<span class="stamp">${money(p.p)}</span></div><div class="pb"><small>${p.c}</small><h3>${p.n}</h3><button class="add" data-add="${p.id}">Add to cart</button></div></article>`).join(""):'<p class="empty">No products match your search.</p>';
+}
+function lines(){return Object.keys(cart).map(id=>({p:P.find(x=>x.id==id),q:cart[id]})).filter(x=>x.p)}
+function total(){return lines().reduce((s,x)=>s+x.p.p*x.q,0)}
+function renderCart(){
+ const L=lines();$("count").textContent=L.reduce((s,x)=>s+x.q,0);
+ $("total").textContent=money(total());$("checkout").disabled=!L.length;
+ $("items").innerHTML=L.length?L.map(x=>`<div class="it">${art(x.p)}<div><strong>${x.p.n}</strong><div>${money(x.p.p)}</div><div class="qty"><button data-d="${x.p.id}" aria-label="Decrease ${x.p.n}">−</button><span>${x.q}</span><button data-u="${x.p.id}" aria-label="Increase ${x.p.n}">+</button></div></div><button class="rm" data-r="${x.p.id}">Remove</button></div>`).join(""):'<p class="empty">Your cart is empty.</p>';
+ save();
+}
+function show(id,on){$(id).hidden=!on}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("button");if(!t)return;const d=t.dataset;
+ if(d.add){cart[d.add]=(cart[d.add]||0)+1;renderCart();t.textContent="Added ✓";setTimeout(()=>t.textContent="Add to cart",900)}
+ if(d.u){cart[d.u]++;renderCart()}
+ if(d.d){cart[d.d]--;if(cart[d.d]<1)delete cart[d.d];renderCart()}
+ if(d.r){delete cart[d.r];renderCart()}
+ if(d.cat){cat=d.cat;document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===t));grid()}
+});
+$("cartbtn").onclick=()=>show("cartov",true);
+$("cartx").onclick=()=>show("cartov",false);
+$("cox").onclick=()=>show("coov",false);
+$("sort").onchange=e=>{sort=e.target.value;grid()};
+$("q").oninput=e=>{q=e.target.value.trim().toLowerCase();grid()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){show("cartov",false);show("coov",false)}});
+["cartov","coov"].forEach(i=>$(i).addEventListener("click",e=>{if(e.target.id===i)show(i,false)}));
+$("checkout").onclick=()=>{show("cartov",false);form();show("coov",true)};
+function form(){
+ $("cobody").innerHTML=`<p>Order total: <strong>${money(total())}</strong></p>
+ <form id="f" novalidate>
+ <label>Full name<input name="name" autocomplete="name"></label><p class="err" data-e="name"></p>
+ <label>Email<input name="email" type="email" autocomplete="email"></label><p class="err" data-e="email"></p>
+ <label>Phone<input name="phone" type="tel" autocomplete="tel"></label><p class="err" data-e="phone"></p>
+ <label>Delivery address<input name="addr" autocomplete="street-address"></label><p class="err" data-e="addr"></p>
+ <button class="chip" type="button" id="pin" style="margin-top:.4rem">📍 Share my location</button><p class="note" id="pinmsg" style="margin-top:.4rem">Optional: add a map pin so the rider can find you.</p>
+ <label>Payment<select name="pay"><option>Pay on delivery</option><option>Card (demo)</option></select></label>
+ <button class="go" style="margin-top:1.2rem" type="submit">Place order</button>
+ <div class="note">Demo store: no payment is taken and nothing is shipped.</div></form>`;
+ pin="";$("pin").onclick=()=>{
+  if(!navigator.geolocation){$("pinmsg").textContent="Your browser can't share its location. Type your address instead.";return}
+  $("pinmsg").textContent="Asking for your location…";
+  navigator.geolocation.getCurrentPosition(p=>{pin="https://maps.google.com/?q="+p.coords.latitude.toFixed(5)+","+p.coords.longitude.toFixed(5);$("pinmsg").textContent="Location pinned ✓. The rider will get a map pin."},
+   e=>{$("pinmsg").textContent=(e.code===1?"Location access wasn't allowed. ":"Couldn't work out your location. ")+"Type your address instead."},{timeout:10000,maximumAge:600000});
+ };
+ $("f").onsubmit=e=>{e.preventDefault();const f=e.target,v=n=>f[n].value.trim(),er={};
+  if(v("name").length<2)er.name="Enter your full name.";
+  if(!/^\S+@\S+\.\S+$/.test(v("email")))er.email="Enter a valid email address.";
+  if(v("phone").replace(/\D/g,"").length<10)er.phone="Enter a valid phone number.";
+  if(v("addr").length<6&&!pin)er.addr="Enter your delivery address or share your location.";
+  f.querySelectorAll(".err").forEach(p=>p.textContent=er[p.dataset.e]||"");
+  if(Object.keys(er).length)return;
+  const no="KR-"+Math.floor(100000+Math.random()*900000);cart={};renderCart();
+  $("cobody").innerHTML=`<div class="ok"><h2>Thank you, ${esc(v("name").split(" ")[0])}!</h2><p>Your order <strong>${no}</strong> is confirmed.<br>A confirmation would be sent to ${esc(v("email"))}.${pin?"<br>Your map pin was included for delivery.":""}</p><button class="go" id="done" style="margin-top:1rem">Keep shopping</button></div>`;
+  $("done").onclick=()=>show("coov",false);
+ };
+}
+grid();renderCart();
+</script>
+</body>
+</html>

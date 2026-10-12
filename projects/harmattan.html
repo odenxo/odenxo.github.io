@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Harmattan | Weather, plainly</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#EDF1EE;--card:#FFFFFF;--ink:#12302E;--muted:#506664;--line:#D3DDD8;--accent:#12302E;--accent-ink:#FFFFFF;--err:#8F2A1E;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1D1F;--card:#162A2D;--ink:#E7F1ED;--muted:#9BB5B0;--line:#2B4547;--accent:#E7F1ED;--accent-ink:#0E1D1F;--err:#FFA395}}
+:root[data-theme="dark"]{--bg:#0E1D1F;--card:#162A2D;--ink:#E7F1ED;--muted:#9BB5B0;--line:#2B4547;--accent:#E7F1ED;--accent-ink:#0E1D1F;--err:#FFA395}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 "Public Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;margin:0}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.app{max-width:720px;margin:0 auto;padding:1.25rem 1.1rem 3rem}
+.top{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1rem}
+.brand{font:800 1.5rem "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;margin-right:auto}
+form.s{display:flex;gap:.4rem;flex:1 1 100%;order:3}
+@media (min-width:600px){form.s{order:0;flex:0 1 18rem}}
+form.s input{flex:1;min-width:0;padding:.55rem .8rem;border:2px solid var(--ink);border-radius:10px;background:var(--card)}
+form.s button{border:0;background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:.55rem .9rem;font-weight:600}
+.loc{border:2px solid var(--ink);background:transparent;border-radius:10px;padding:.45rem .8rem;font-weight:600}
+.units{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.units button{border:0;background:transparent;padding:.45rem .8rem;font-weight:600}
+.units button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+#status{min-height:1.4rem;margin:0 0 .6rem;font-size:.9rem;color:var(--muted)}
+#status.err{color:var(--err);font-weight:600}
+.pick{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.pick button{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:.25rem .8rem}
+.hero{border-radius:22px;padding:1.4rem;color:#fff;background:#5B6B78}
+.hero.clear{background:#E0A12B;color:#2A1B00}
+.hero.cloud{background:#5B6B78}
+.hero.fog{background:#6E6A5A}
+.hero.rain{background:#3A6684}
+.hero.storm{background:#473C6B}
+.hero.snow{background:#4E7C86}
+.hero h2{font-size:1.2rem;font-weight:600}
+.big{display:flex;align-items:center;gap:.8rem;margin:.4rem 0}
+.big b{font:800 clamp(4rem,18vw,6.5rem)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.04em}
+.big span{font-size:3rem}
+.cond{font-size:1.2rem;font-weight:600}
+.det{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.6rem;margin-top:1.1rem}
+.det div{background:rgba(255,255,255,.18);border-radius:12px;padding:.6rem .8rem}
+.hero.clear .det div{background:rgba(42,27,0,.12)}
+.det small{display:block;opacity:.9;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.det strong{font-size:1.15rem}
+h3.sec{font-size:1.15rem;margin:1.5rem 0 .6rem}
+.hours{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem}
+.h{flex:none;min-width:4.2rem;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.6rem .4rem}
+.h span{display:block;font-size:1.5rem}
+.h small{color:var(--muted)}
+.days{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.d{display:grid;grid-template-columns:3.2rem 2rem 2.8rem 1fr;gap:.6rem;align-items:center;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
+.d:last-child{border-bottom:0}
+.d .ic{font-size:1.4rem}
+.d .rain{color:var(--muted);font-size:.85rem}
+.rng{display:grid;grid-template-columns:2.4rem 1fr 2.4rem;gap:.4rem;align-items:center;font-size:.9rem}
+.rng i{position:relative;height:6px;border-radius:3px;background:var(--line)}
+.rng i b{position:absolute;top:0;bottom:0;border-radius:3px;background:var(--ink)}
+.rng em{font-style:normal;color:var(--muted);text-align:right}
+footer{margin-top:1.5rem;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="top">
+    <div class="brand">Harmattan</div>
+    <form class="s" id="sf"><input id="city" placeholder="Search a city" aria-label="Search a city" autocomplete="off"><button type="submit">Search</button></form>
+    <button class="loc" id="loc" type="button">📍 Use my location</button>
+    <div class="units" role="group" aria-label="Units"><button data-u="c" aria-pressed="true">°C</button><button data-u="f" aria-pressed="false">°F</button></div>
+  </div>
+  <p id="status" role="status" aria-live="polite"></p>
+  <div class="pick" id="pick"></div>
+  <div id="out"></div>
+  <footer>Weather data from Open-Meteo. Built by Abode Felix Ibinabo.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const W=c=>c===0?["Clear sky","clear","☀️"]:c<=2?["Partly cloudy","cloud","⛅"]:c===3?["Overcast","cloud","☁️"]:c<=48?["Fog","fog","🌫️"]:c<=57?["Drizzle","rain","🌦️"]:c<=67?["Rain","rain","🌧️"]:c<=77?["Snow","snow","❄️"]:c<=82?["Rain showers","rain","🌦️"]:c<=86?["Snow showers","snow","❄️"]:["Thunderstorm","storm","⛈️"];
+let place={name:"Port Harcourt",country:"Nigeria",lat:4.8156,lon:7.0498},data=null,unit="c",demo=false;
+let saved=false;
+try{const s=JSON.parse(localStorage.getItem("harm-place")||"null");if(s&&s.lat){place=s;saved=true}if(localStorage.getItem("harm-unit")==="f")unit="f"}catch(e){}
+const T=v=>unit==="c"?Math.round(v)+"°":Math.round(v*9/5+32)+"°";
+const S=v=>unit==="c"?Math.round(v)+" km/h":Math.round(v/1.609)+" mph";
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+"T"+pad(d.getHours())+":00";
+function sample(){
+ const now=new Date();now.setMinutes(0,0,0);const hourly={time:[],temperature_2m:[],weather_code:[]};
+ for(let i=0;i<48;i++){const d=new Date(now.getTime()+i*36e5),h=d.getHours();hourly.time.push(iso(d));hourly.temperature_2m.push(27+4*Math.sin((h-9)/24*2*Math.PI));hourly.weather_code.push(h>=15&&h<=18?95:h>=19&&h<=22?61:2)}
+ const daily={time:[],weather_code:[2,61,95,2,3,61,0],temperature_2m_max:[31,29,28,31,30,29,32],temperature_2m_min:[24,23,23,24,24,23,24],precipitation_probability_max:[20,70,85,25,35,65,10]};
+ for(let i=0;i<7;i++){const d=new Date(now.getTime()+i*864e5);daily.time.push(d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()))}
+ return {current:{time:iso(now),temperature_2m:29,apparent_temperature:33,relative_humidity_2m:78,wind_speed_10m:12,weather_code:2},hourly,daily};
+}
+async function getJSON(url){const c=new AbortController(),t=setTimeout(()=>c.abort(),8000);try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw new Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(t)}}
+async function load(){
+ $("status").className="";$("status").textContent="Loading weather for "+place.name+"…";
+ try{
+  data=await getJSON("https://api.open-meteo.com/v1/forecast?latitude="+place.lat+"&longitude="+place.lon+"&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=7");
+  demo=false;$("status").textContent="Updated just now.";
+ }catch(e){
+  data=sample();demo=true;$("status").className="err";
+  $("status").textContent="Live weather is unavailable here, so this is demo data for "+place.name+". Host the page on your own site for live data.";
+ }
+ render();
+}
+function render(){
+ if(!data)return;const c=data.current,w=W(c.weather_code),d=data.daily;
+ let i0=data.hourly.time.findIndex(t=>t>=c.time.slice(0,13));if(i0<0)i0=0;
+ const hrs=data.hourly.time.slice(i0,i0+24).map((t,k)=>{const j=i0+k,h=W(data.hourly.weather_code[j]);return `<div class="h"><small>${k===0?"Now":t.slice(11,13)+":00"}</small><span aria-hidden="true">${h[2]}</span><strong>${T(data.hourly.temperature_2m[j])}</strong><small class="sr" hidden>${h[0]}</small></div>`}).join("");
+ const lo=Math.min(...d.temperature_2m_min),hi=Math.max(...d.temperature_2m_max),sp=hi-lo||1;
+ const days=d.time.map((t,k)=>{const x=W(d.weather_code[k]),a=(d.temperature_2m_min[k]-lo)/sp*100,b=(d.temperature_2m_max[k]-lo)/sp*100,n=k===0?"Today":new Date(t+"T00:00").toLocaleDateString("en-GB",{weekday:"short"});
+  return `<li class="d"><strong>${n}</strong><span class="ic" role="img" aria-label="${x[0]}">${x[2]}</span><span class="rain">${d.precipitation_probability_max[k]??0}%</span><div class="rng"><em>${T(d.temperature_2m_min[k])}</em><i><b style="left:${a}%;width:${Math.max(b-a,6)}%"></b></i><em>${T(d.temperature_2m_max[k])}</em></div></li>`}).join("");
+ $("out").innerHTML=`<section class="hero ${w[1]}"><h2>${esc(place.name)}${place.country?", "+esc(place.country):""}</h2>
+ <div class="big"><b>${T(c.temperature_2m)}</b><span aria-hidden="true">${w[2]}</span></div><div class="cond">${w[0]}</div>
+ <div class="det"><div><small>Feels like</small><strong>${T(c.apparent_temperature)}</strong></div><div><small>Humidity</small><strong>${Math.round(c.relative_humidity_2m)}%</strong></div><div><small>Wind</small><strong>${S(c.wind_speed_10m)}</strong></div><div><small>Rain today</small><strong>${d.precipitation_probability_max[0]??0}%</strong></div></div></section>
+ <h3 class="sec">Next 24 hours</h3><div class="hours">${hrs}</div>
+ <h3 class="sec">7-day forecast</h3><ul class="days">${days}</ul>`;
+}
+$("sf").onsubmit=async e=>{e.preventDefault();const q=$("city").value.trim();if(!q)return;
+ $("pick").innerHTML="";$("status").className="";$("status").textContent="Searching…";
+ try{const r=await getJSON("https://geocoding-api.open-meteo.com/v1/search?count=5&name="+encodeURIComponent(q));
+  if(!r.results||!r.results.length){$("status").className="err";$("status").textContent="No place found for “"+q+"”. Try another spelling.";return}
+  if(r.results.length===1)choose(r.results[0]);
+  else{$("status").textContent="Choose the right place:";$("pick").innerHTML=r.results.map((p,k)=>`<button data-k="${k}">${esc(p.name)}${p.admin1?", "+esc(p.admin1):""}, ${esc(p.country||"")}</button>`).join("");window._r=r.results}
+ }catch(err){$("status").className="err";$("status").textContent="Search needs a connection to the weather service, which isn't available here."}
+};
+function choose(p){place={name:p.name,country:p.country||"",lat:p.latitude,lon:p.longitude};try{localStorage.setItem("harm-place",JSON.stringify(place))}catch(e){}$("pick").innerHTML="";load()}
+$("pick").addEventListener("click",e=>{const b=e.target.closest("button");if(b)choose(window._r[+b.dataset.k])});
+document.querySelectorAll(".units button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.u===unit);b.onclick=()=>{unit=b.dataset.u;try{localStorage.setItem("harm-unit",unit)}catch(e){}document.querySelectorAll(".units button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()}});
+function locate(auto){
+ if(!navigator.geolocation){$("status").className="err";$("status").textContent="Your browser can't share its location. Search for a city instead.";if(auto)load();return}
+ $("status").className="";$("status").textContent="Asking for your location…";
+ navigator.geolocation.getCurrentPosition(p=>{place={name:"Your location",country:"",lat:+p.coords.latitude.toFixed(3),lon:+p.coords.longitude.toFixed(3)};$("pick").innerHTML="";load()},
+  e=>{const m=(e.code===1?"Location access wasn't allowed. ":"Couldn't work out your location. ")+"Showing "+place.name+". You can search for a city instead.";load().then(()=>{$("status").className="err";$("status").textContent=m+" "+($("status").className==="err"&&demo?$("status").textContent:"")})},
+  {timeout:10000,maximumAge:600000});
+}
+$("loc").onclick=()=>locate(false);
+if(saved)load();else locate(true);
+</script>
+</body>
+</html>
