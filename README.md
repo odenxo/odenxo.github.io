@@ -4,19 +4,27 @@ My personal portfolio: copy and content writer, social media manager, AI video c
 
 **Live site:** https://odenxo.github.io/
 
-## What's inside
+## Project structure
 
-- `index.html` is the portfolio page: about, services, featured work, experience and contact.
-- `projects/` holds three web apps I designed and coded:
-  - **Kora**, an online store with cart, checkout and a delivery location pin.
-  - **Plumb**, a task manager with priorities, due dates and undo.
-  - **Harmattan**, a weather dashboard that uses your location and the Open-Meteo API.
-- `videos/` holds two AI video samples.
-- `Abode_Felix_Ibinabo_CV.pdf` is my CV.
+```
+portfolio-site/
+├── index.html                 Page markup (structure and content only)
+├── css/
+│   └── styles.css             All styles, grouped by section
+├── js/
+│   └── main.js                Theme, menu, typing text, filters, panels, contact form
+├── images/                    Photo and video thumbnails
+├── videos/                    The two AI video samples
+├── Abode_Felix_Ibinabo_CV.pdf My CV
+└── projects/                  Three web apps, each with its own HTML, CSS and JS
+    ├── kora/                  E-commerce store with cart, checkout and delivery pin
+    ├── plumb/                 Task manager with priorities, due dates and undo
+    └── harmattan/             Weather dashboard using your location and Open-Meteo
+```
 
 ## Built with
 
-Plain HTML, CSS and JavaScript. No frameworks, no build step.
+Plain HTML, CSS and JavaScript. No frameworks and no build step.
 
 ## Run it locally
 

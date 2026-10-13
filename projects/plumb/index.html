@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Plumb | Tasks, kept straight</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <div class="head">
+        <div>
+          <h1>Plumb</h1>
+          <p class="tag" id="today">Tasks, kept straight.</p>
+        </div>
+        <div class="ring" role="img" aria-label="Progress">
+          <svg viewBox="0 0 60 60">
+            <circle
+              cx="30"
+              cy="30"
+              r="26"
+              fill="none"
+              stroke="var(--line)"
+              stroke-width="6"
+            />
+            <circle
+              id="arc"
+              cx="30"
+              cy="30"
+              r="26"
+              fill="none"
+              stroke="var(--brand)"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-dasharray="163.4"
+              stroke-dashoffset="163.4"
+            /></svg
+          ><b id="pct">0%</b>
+        </div>
+      </div>
+
+      <form class="add" id="f" novalidate>
+        <div class="full">
+          <label for="title">New task</label
+          ><input
+            id="title"
+            maxlength="120"
+            placeholder="What needs doing?"
+            autocomplete="off"
+          />
+        </div>
+        <div>
+          <label for="pr">Priority</label
+          ><select id="pr">
+            <option value="high">High</option>
+            <option value="med" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div>
+          <label for="due">Due date</label><input id="due" type="date" />
+        </div>
+        <p class="msg" id="msg" aria-live="polite"></p>
+        <button class="addbtn" type="submit">Add task</button>
+      </form>
+
+      <div class="bar">
+        <button class="tab" data-f="all" aria-pressed="true">
+          All <span id="n-all"></span>
+        </button>
+        <button class="tab" data-f="active" aria-pressed="false">
+          To do <span id="n-active"></span>
+        </button>
+        <button class="tab" data-f="done" aria-pressed="false">
+          Done <span id="n-done"></span>
+        </button>
+        <input
+          id="q"
+          type="search"
+          placeholder="Search"
+          aria-label="Search tasks"
+        />
+        <select id="sort" aria-label="Sort tasks">
+          <option value="new">Newest</option>
+          <option value="due">Due date</option>
+          <option value="pri">Priority</option>
+        </select>
+      </div>
+
+      <ul class="list" id="list"></ul>
+      <div class="foot">
+        <span id="left" aria-live="polite"></span
+        ><button class="clear" id="clear">Clear completed</button>
+      </div>
+    </main>
+    <div class="toast" id="toast" hidden>
+      <span id="tmsg"></span><button id="undo">Undo</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

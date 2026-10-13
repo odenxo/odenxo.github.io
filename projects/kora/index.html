@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Kora | Made in Nigeria, made to keep</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="bar">
+        <div class="logo">
+          <svg viewBox="0 0 28 24" aria-hidden="true">
+            <path
+              d="M4 22V8M10 22V3M16 22V5M22 22V10"
+              stroke="var(--gold)"
+              stroke-width="3"
+              stroke-linecap="round"
+              fill="none"
+            /></svg
+          >KORA
+        </div>
+        <input
+          class="search"
+          id="q"
+          type="search"
+          placeholder="Search products"
+          aria-label="Search products"
+        />
+        <button class="cartbtn" id="cartbtn" aria-label="Open cart">
+          Cart <b id="count" aria-live="polite">0</b>
+        </button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1>Made in Nigeria.<br /><em>Made to keep.</em></h1>
+          <p>
+            Hand-finished wear, bags and home pieces, named for the kora, the
+            West African harp-lute: patient work, played well. Free delivery in
+            Port Harcourt over ₦50,000.
+          </p>
+          <a class="cta" href="#shop">Shop the collection</a>
+        </div>
+        <div class="pat" id="hero-pat" aria-hidden="true"></div>
+      </section>
+      <section class="vals">
+        <div>Hand-finished<span>Every piece checked by eye</span></div>
+        <div>Made in Nigeria<span>Cloth, clay and leather</span></div>
+        <div>Pay on delivery<span>Available nationwide</span></div>
+      </section>
+      <section id="shop">
+        <div class="tools">
+          <button class="chip" data-cat="All" aria-pressed="true">All</button>
+          <button class="chip" data-cat="Wear" aria-pressed="false">
+            Wear
+          </button>
+          <button class="chip" data-cat="Carry" aria-pressed="false">
+            Carry
+          </button>
+          <button class="chip" data-cat="Home" aria-pressed="false">
+            Home
+          </button>
+          <select class="sort" id="sort" aria-label="Sort products">
+            <option value="def">Featured</option>
+            <option value="lo">Price: low to high</option>
+            <option value="hi">Price: high to low</option>
+          </select>
+        </div>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        Kora is a demo store built by Abode Felix Ibinabo. No real payments are
+        taken.
+      </div>
+    </footer>
+
+    <div
+      class="ov"
+      id="cartov"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ct"
+    >
+      <div class="drawer">
+        <div class="dh">
+          <h2 id="ct">Your cart</h2>
+          <button class="x" id="cartx" aria-label="Close cart">&times;</button>
+        </div>
+        <div id="items"></div>
+        <div class="tot"><span>Total</span><span id="total">₦0</span></div>
+        <button class="go" id="checkout" disabled>Checkout</button>
+      </div>
+    </div>
+
+    <div
+      class="ov"
+      id="coov"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cot"
+    >
+      <div class="drawer">
+        <div class="dh">
+          <h2 id="cot">Checkout</h2>
+          <button class="x" id="cox" aria-label="Close checkout">
+            &times;
+          </button>
+        </div>
+        <div id="cobody"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Harmattan | Weather, plainly</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <div class="top">
+        <div class="brand">Harmattan</div>
+        <form class="s" id="sf">
+          <input
+            id="city"
+            placeholder="Search a city"
+            aria-label="Search a city"
+            autocomplete="off"
+          /><button type="submit">Search</button>
+        </form>
+        <button class="loc" id="loc" type="button">📍 Use my location</button>
+        <div class="units" role="group" aria-label="Units">
+          <button data-u="c" aria-pressed="true">°C</button
+          ><button data-u="f" aria-pressed="false">°F</button>
+        </div>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div class="pick" id="pick"></div>
+      <div id="out"></div>
+      <footer>
+        Weather data from Open-Meteo. Built by Abode Felix Ibinabo.
+      </footer>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
